@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Codeplayer</title>
+
+	<script src="jquery.min.js"></script>
+
+	<style type="text/css">
+		body {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		#wrapper {
+			padding: 0px;
+		}
+
+		#menueleiste {
+			border-bottom: 1px solid black;
+			background-color: gainsboro;
+			height: 40px;
+		}		
+
+		#logo {
+			padding-left: 10px;
+			padding-top: 10px;
+			font-family: sans-serif;
+			font-weight: bold;
+		}
+
+		#buttonDiv {
+			float: right;
+			margin-top: -22px;
+			margin-right: 10px;
+		}
+
+		#buttonRun {
+			border-radius: 10px;
+			font-size: 110%;
+			background-color: white;
+		}
+		
+		
+
+		#toggles {
+			width: 200px;
+			height: 27px;
+			list-style: none;
+			margin: 0 auto;
+			margin-top: -22px;
+			border: 1px solid black;
+			border-radius: 5px;
+			padding: 0;
+			
+		}
+
+		#toggles li {
+			margin-top: -22px;
+			padding: 0;
+			float: left;
+			border-right: 1px solid gray;
+			padding: 5px 7px;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		.clear {
+			clear: both;
+		}
+		
+		.codeContainer {
+			width: 50%;
+			position: relative;
+			float: left;
+		
+		}
+
+		.codeContainer textarea {
+			width: 100%;
+			height: 100%;
+			border: none;
+			border-right: 1px solid gray;
+			font-family: monospace;
+			padding: 5px 7px;
+			box-sizing: border-box; 
+		}
+
+		#ContainerLabel {
+			position: absolute;
+			right: 20px;
+			top: 10px;
+			border: 1px dotted black;
+			border-radius: 5px;
+			padding: 5px;
+		}
+
+		#JSContainer, #CSSContainer {
+			display: none;
+		}
+
+		iframe {
+			position: relative;
+			width: 90%;
+			height: 100%;
+			left: 20px;
+			border: none;
+		}
+
+		.selected {
+			background-color: grey;
+		}
+
+	</style>
+
+</head>
+
+
+
+<body>
+<div id="wrapper">
+	<div id="menueleiste">
+		<div id="logo">CodePlayer</div>
+		<div id="buttonDiv"><button id="buttonRun">Ausführen</button></div>
+		<ul id="toggles">
+			<li class="toggle selected">HTML</li>
+			<li class="toggle">CSS</li>
+			<li class="toggle">JS</li>
+			<li class="toggle selected" style="border: none;">Result</li>
+		</ul>
+	</div>
+	<div class="clear"></div>
+	<div class="codeContainer" id="HTMLContainer">
+		<div id="ContainerLabel">HTML</div>
+		<textarea>TEXT</textarea>
+	</div>
+	<div class="codeContainer" id="CSSContainer">
+			<div id="ContainerLabel">CSS</div>
+			<textarea>TEXT</textarea>
+	</div>
+	<div class="codeContainer" id="JSContainer">
+			<div id="ContainerLabel">JS</div>
+			<textarea>TEXT</textarea>
+	</div>
+	<div class="codeContainer" id="ResultContainer">
+			<div id="ContainerLabel">Result</div>
+			<iframe></iframe>
+	</div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+	var fensterHoehe = $(window).height();
+	var menueLeistenHoehe = $("#menueleiste").height();
+	var containerHoehe = fensterHoehe-menueLeistenHoehe;
+
+	$(".codeContainer").height(containerHoehe+"px");
+
+	$(".toggle").click(function() {
+		$(this).toggleClass("selected");
+
+		var activeElement = $(this).html();
+		$("#"+activeElement+"Container").toggle();
+
+		var angezeigteDivs=$(".codeContainer").filter(function() {
+		return($(this).css("display")!="none");
+		}).length;
+
+		var breite = 100/angezeigteDivs;
+		$(".codeContainer").css("width", breite+"%");
+	});
+
+	
+	
+</script>
+
+</body>
+
+</html>
